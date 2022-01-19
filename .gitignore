@@ -1,6 +1,6 @@
 csvs
 graph_data.*
-
+backend/_site
 # Logs
 logs
 *.log
