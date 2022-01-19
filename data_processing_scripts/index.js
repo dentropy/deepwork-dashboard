@@ -129,7 +129,14 @@ async function doAsync(){
     let projects_csv = await process_projects_csv('../csvs/Projects - Sheet1.csv')
     //console.log(projects_csv)
     let prospects_csv = await process_prospects_csv('../csvs/Prospects - Sheet1.csv')
-    console.log(prospects_csv)
+    let output_obj = {
+        responses : response_csv,
+        projects  : projects_csv,
+        prospects : prospects_csv
+
+    }
+    fs.writeFileSync('graph_data.js', "export const graph_data = " + JSON.stringify(output_obj));
+    console.log("wrote graph_data.js")
 }
 
 doAsync()
