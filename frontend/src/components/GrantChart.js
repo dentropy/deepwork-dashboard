@@ -40,8 +40,6 @@ export const GrantChart = () => {
             type: 'datetime'
           }
         },
-      
-      
     };
 
     React.useEffect(() => {
