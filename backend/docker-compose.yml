@@ -1,9 +1,9 @@
 version: "3.4"
 
 services:
-  nginx:
+  deepwork-backend:
     image: nginx
-    container_name: static-site
+    container_name: deepwork-backend
     restart: unless-stopped  
     #ports:
     #  - 80:80
@@ -16,14 +16,16 @@ services:
       traefik-homelab:
     labels:
         - "traefik.enable=true"
-        - 'traefik.http.routers.static.entrypoints=https'
-        - "traefik.http.routers.static.rule=Host(`deepwork.${MY_DOMAIN}`)" # CHANGE THIS IF YOU WANT
-        - "traefik.http.routers.static.tls.certresolver=myresolver"
-        - "traefik.http.routers.static.service=static@docker"
-        - "traefik.http.services.static.loadbalancer.server.port=80"
-        - "traefik.http.routers.static.tls.options=default"
+        - 'traefik.http.routers.deepwork-backend.entrypoints=https'
+        - "traefik.http.routers.deepwork-backend.rule=Host(`deepwork.${MY_DOMAIN}`)" # CHANGE THIS IF YOU WANT
+        - "traefik.http.routers.deepwork-backend.tls.certresolver=myresolver"
+        - "traefik.http.routers.deepwork-backend.service=deepwork-backend@docker"
+        - "traefik.http.services.deepwork-backend.loadbalancer.server.port=80"
+        - "traefik.http.routers.deepwork-backend.tls.options=default"
         - "traefik.docker.network=traefik-homelab"
-
+        # echo $(htpasswd -nb user password) | sed -e s/\\$/\\$\\$/g
+        - "traefik.http.middlewares.test-auth.basicauth.users=user:$$apr1$$T3qH6Aa2$$DrRzHczCyMfdfb7CLf7qX1" # user password
+        - "traefik.http.routers.deepwork-backend.middlewares=test-auth"
 networks:
   traefik-homelab:
     external:
