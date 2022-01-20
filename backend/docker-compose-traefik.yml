@@ -43,10 +43,10 @@ services:
       - --certificatesresolvers.myresolver.acme.tlschallenge=true
 
       # Linode Lets Encrypt Resolvers
-      - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=linodev4"
-      - "--certificatesresolvers.myresolver.acme.email=${MY_EMAIL}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      # - "--certificatesresolvers.myresolver.acme.dnschallenge=true"
+      # - "--certificatesresolvers.myresolver.acme.dnschallenge.provider=linodev4"
+      # - "--certificatesresolvers.myresolver.acme.email=${MY_EMAIL}"
+      # - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     # environment:
       # - LINODE_TOKEN=${LINODE_TOKEN}
       # We need to provide credentials to our DNS provider.
