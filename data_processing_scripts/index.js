@@ -136,6 +136,7 @@ async function doAsync(){
 
     }
     fs.writeFileSync('graph_data.js', "export const graph_data = " + JSON.stringify(output_obj));
+    
     console.log("wrote graph_data.js")
 }
 

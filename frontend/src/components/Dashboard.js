@@ -2,15 +2,34 @@ import React from 'react';
 import Chart from "react-apexcharts";
 import { graph_data } from './graph_data';
 
+
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+
 export const Dashboard = () => {
     //const [state, dispatch] = React.useContext(DiscordContext);
     const [renderedGraph, setRenderedGraph] = React.useState(<h1>Rendering</h1>);
     
     let ProspectsGraphInput = {
-      series: [{
-        name: 'Prospects',
-        data: graph_data.prospects
-      }],
+      series: [
+        {
+          name: 'Prospects',
+          data: graph_data.prospects
+        },
+        {
+          name: 'Responses',
+          data: graph_data.responses
+        }
+      ],
       options: {
         chart: {
           type: 'area',
@@ -71,7 +90,7 @@ export const Dashboard = () => {
 
     let ResponsesGraphInput = {
         series: [{
-          name: 'Prospects',
+          name: 'Responses',
           data: graph_data.responses
         }],
         options: {
@@ -95,7 +114,7 @@ export const Dashboard = () => {
             size: 0,
           },
           title: {
-            text: 'Prospects per Month',
+            text: 'Responses per Month',
             align: 'left'
           },
           fill: {
@@ -175,9 +194,14 @@ export const Dashboard = () => {
     return (
       <>
         <div id="chart">
-            <Chart options={ProspectsGraphInput.options} series={ProspectsGraphInput.series} type="area" height={1000} />
-            <Chart options={ResponsesGraphInput.options} series={ResponsesGraphInput.series} type="area" height={1000} />
-            <Chart options={ProjectsGraphData.options} series={ProjectsGraphData.series} type="rangeBar" height={1000} />
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={6}>
+           <Chart options={ProspectsGraphInput.options} series={ProspectsGraphInput.series} type="area" height={window.innerHeight} />
+          </Grid>
+          <Grid item xs={6} md={6}>
+            <Chart options={ProjectsGraphData.options} series={ProjectsGraphData.series} type="rangeBar" height={window.innerHeight} />
+          </Grid>
+        </Grid>
         </div>
       </>
     )
