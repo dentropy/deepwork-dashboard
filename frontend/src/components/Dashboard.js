@@ -1,18 +1,7 @@
 import React from 'react';
 import Chart from "react-apexcharts";
 import { graph_data } from './graph_data';
-
-
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 
 export const Dashboard = () => {
@@ -88,71 +77,6 @@ export const Dashboard = () => {
       },    
     };
 
-    let ResponsesGraphInput = {
-        series: [{
-          name: 'Responses',
-          data: graph_data.responses
-        }],
-        options: {
-          chart: {
-            type: 'area',
-            stacked: false,
-            height: 350,
-            zoom: {
-              type: 'x',
-              enabled: true,
-              autoScaleYaxis: true
-            },
-            toolbar: {
-              autoSelected: 'zoom'
-            }
-          },
-          dataLabels: {
-            enabled: false
-          },
-          markers: {
-            size: 0,
-          },
-          title: {
-            text: 'Responses per Month',
-            align: 'left'
-          },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              shadeIntensity: 1,
-              inverseColors: false,
-              opacityFrom: 0.5,
-              opacityTo: 0,
-              stops: [0, 90, 100]
-            },
-          },
-          yaxis: {
-            labels: {
-              formatter: function (val) {
-                return (val );
-              },
-            },
-            title: {
-              text: 'Number of Responses'
-            },
-          },
-          xaxis: {
-            type: 'datetime',
-          },
-          tooltip: {
-            shared: false,
-            y: {
-              formatter: function (val) {
-                return (val)
-              }
-            }
-          }
-        },    
-      };
-
-
-
     function convert_dates(data_in) {
         for(var i = 0; i < data_in.length; i++) {
             data_in[i].y[0] = new Date(data_in[i].y[0]).getTime()
@@ -180,9 +104,22 @@ export const Dashboard = () => {
           },
           xaxis: {
             type: 'datetime'
+          },
+          title: {
+            text: 'Current Projects'
           }
         },
     };
+    let new_dates = []
+    for (var i = 0; i < ProjectsGraphData.series[0].data.length; i++) {
+
+      if (ProjectsGraphData.series[0].data[i].y[1] > Date.now()) {
+        // delete ProjectsGraphData.series[0].data[i].y[1]
+        new_dates.push(ProjectsGraphData.series[0].data[i])
+      }
+    }
+    ProjectsGraphData.series[0].data = new_dates
+
     React.useEffect(() => {
         async function doAsync (){
           // setRenderedGraph()
