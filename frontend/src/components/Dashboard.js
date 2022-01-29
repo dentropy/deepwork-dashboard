@@ -51,7 +51,7 @@ export const Dashboard = () => {
           size: 0,
         },
         title: {
-          text: 'Prospects per Month',
+          text: 'Prospects and Responses per Month',
           align: 'left'
         },
         fill: {
