@@ -133,10 +133,10 @@ export const Dashboard = () => {
         <div id="chart">
         <Grid container spacing={2}>
           <Grid item xs={6} md={6}>
-           <Chart options={ProspectsGraphInput.options} series={ProspectsGraphInput.series} type="area" height={window.innerHeight} />
+           <Chart options={ProspectsGraphInput.options} series={ProspectsGraphInput.series} type="area" height={window.innerHeight - 75} />
           </Grid>
           <Grid item xs={6} md={6}>
-            <Chart options={ProjectsGraphData.options} series={ProjectsGraphData.series} type="rangeBar" height={window.innerHeight} />
+            <Chart options={ProjectsGraphData.options} series={ProjectsGraphData.series} type="rangeBar" height={window.innerHeight - 75} />
           </Grid>
         </Grid>
         </div>
